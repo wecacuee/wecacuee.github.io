@@ -44,7 +44,7 @@ def foo(a = 1, b = 3, c = 2):
     return bar(x = x, b = b, c = c)
 ```
 
-A better say is to pass the underlying function as a dictionary.
+A better way is to pass the underlying function as a dictionary.
 
 ``` python
 def foo(a = 1, bar_kw = dict(b = 3, c= 2)):
@@ -53,7 +53,8 @@ def foo(a = 1, bar_kw = dict(b = 3, c= 2)):
     return bar(x = x, **bar_kw)
 ```
 
-A better way is to consider the `bar`, the function itself a part of configuration.
+An even better way is to consider the `bar`, the function itself a
+part of configuration.
 
 ``` python
 from functools import partial
