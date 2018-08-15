@@ -1,4 +1,11 @@
 ---
-layout: post
-title: Named-tree programming style
+layout: page
 ---
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
