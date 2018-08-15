@@ -4,7 +4,6 @@ title:  "Named-tree programming style"
 date:   2018-08-15
 categories: programming-style
 ---
-# Named-tree programming style
 
 Named-tree programming is a natural Pythonic functional programming paradigm. It
 encourages thinking of functions and classes as sub-trees in a bigger tree.
