@@ -2,3 +2,4 @@ url: https://wecacuee.github.io
 theme: minima
 title: Vikas Dhiman's technical blog
 description: What I learned today 
+permalink: /:categories/:year/:month/:day/:title:output_ext
