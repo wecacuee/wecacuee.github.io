@@ -23,13 +23,12 @@ keeping it flexible.
 
 # Problem: Choice of configuration language
 
-"All configuration language will eventually evolve into poorly written LISP"
-
-The dilemma of choosing configuration language comes from a desire to chose a
-configuration language that does not mess up with the rest of the program.
-
-That is equivalent of checking for user arguments to a functions. This makes
-configuration arguments to a function 
+The common choices of configuration language are JSON, XML and Protocol Buffers.
+The desirable properties of these languages are that they must be serializable
+into human readable and editable text format. But why not use a programming
+language like Python or LISP for saving the configuration. Why distinguish between
+a configuration language and a programming language? All configuration languages
+are a subset of programming languages.
 
 # Problem: Passing configuration arguments deep into the functions of functions.
 
