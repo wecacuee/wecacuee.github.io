@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Named-tree programming style"
-date:   2018-08-15
+date:   2019-06-15
 categories: programming-style
 ---
 
@@ -67,7 +67,15 @@ def foo(a = 1, bar_ = bar_b3_c2):
     return bar_(x = x)
 ```
 
+## Solution: recpartial
 
+``` python
+from kwplus.functools import recpartial
+
+foo_b3_c2 = recpartial(foo,
+              {"bar.b": 3, "bar.c": 2})
+
+```
 
 # Program-Configuration relation
 
