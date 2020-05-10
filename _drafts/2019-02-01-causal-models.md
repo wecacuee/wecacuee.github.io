@@ -1,9 +1,11 @@
 ---
 layout: post
 title: Causality
+date:   2019-02-01
+categories: statistics
 ---
 
-# Is causality useful?
+How is causality useful in developing AI?
 
 # What is causality
 

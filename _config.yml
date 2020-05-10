@@ -1,9 +1,41 @@
 url: https://wecacuee.github.io
-theme: minima
-title: Vikas Dhiman's technical blog
+theme: plainwhite
+remote_theme: thelehhman/plainwhite-jekyll
+title: Vikas Dhiman's blog
+author: Vikas Dhiman
 description: What I learned today 
+show_excerpts: true
 
 # Build settings
 markdown: kramdown
 permalink: pretty
 paginate: 3
+
+
+header_pages:
+  - about.md
+
+
+plugins:
+  - jekyll-paginate
+
+plainwhite:
+  name: Vikas Dhiman
+  tagline: |
+     AI, Robotics,
+
+     Machine Learning
+
+  navigation:
+    - title: About
+      url: "/about"
+    - title: Old website
+      url: "http://vikasdhiman.info"
+    - title: Scholar
+      url: https://scholar.google.com/citations?user=6Pn0FGUAAAAJ&hl=en
+    - title: PGP key
+      url: http://keys.gnupg.net/pks/lookup?op=get&search=0xB111F9DBEFC3DD0E
+    
+
+  social_links:
+    github: wecacuee

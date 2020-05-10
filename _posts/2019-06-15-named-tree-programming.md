@@ -2,7 +2,7 @@
 layout: post
 title:  "Named-tree programming style"
 date:   2019-06-15
-categories: programming-style
+categories: programming-notes
 ---
 
 Named-tree programming is a natural Pythonic functional programming paradigm. It
