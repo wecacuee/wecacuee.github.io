@@ -23,15 +23,17 @@ plugins:
 plainwhite:
   name: Vikas Dhiman
   tagline: |
+     Postdoc @ UCSD
+     Prof Henrik Christensen
+     Prof Nikolay Atanasov
      AI, Robotics,
-
      Machine Learning
 
   navigation:
-    - title: About
-      url: "/about"
-    - title: Old website
-      url: "http://vikasdhiman.info"
+    - title: Email
+      url: "mailto:vdhiman [@T] ucsd [D0T] edu"
+    - title: Resume
+      url: "/images/resume.pdf"
     - title: Scholar
       url: https://scholar.google.com/citations?user=6Pn0FGUAAAAJ&hl=en
     - title: PGP key
@@ -40,3 +42,4 @@ plainwhite:
 
   social_links:
     github: wecacuee
+    twitter: bujuxe
