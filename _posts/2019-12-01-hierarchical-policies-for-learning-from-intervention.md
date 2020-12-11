@@ -6,7 +6,6 @@ categories: papers
 ---
 
 
-<div style="float:clear" ></div>
 <img style="float:right" src="images/Jing-Bi-AAAI-2020-idea-summary.png" />
 We propose a hierarchical framework for Learning from Intervention to account
 for expert's reaction delay.
