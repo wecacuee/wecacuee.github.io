@@ -1,9 +1,9 @@
 url: https://wecacuee.github.io
 theme: plainwhite
 remote_theme: thelehhman/plainwhite-jekyll
-title: Vikas Dhiman's blog
+title: Vikas Dhiman profile
 author: Vikas Dhiman
-description: What I learned today 
+description: Professional website
 show_excerpts: true
 
 # Build settings
@@ -14,6 +14,7 @@ paginate: 3
 
 header_pages:
   - about.md
+  - publications/mypub.html
 
 
 plugins:
