@@ -2,7 +2,7 @@
 layout: post
 title: Defended my thesis on Localization, Mapping and Navigation
 date: 2018-12-03
-tags: paper
+categories: paper
 ---
 
 Defended my thesis on Dec 3, 2018.
