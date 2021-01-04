@@ -1,7 +1,7 @@
 OUTDIR=.
 
 $(OUTDIR)/mypub.html : mypub.bib $(OUTDIR)/.dirstamp
-	bibtex2html -nodoc -o $(OUTDIR)/mypub $<
+	bibtex2html -noabstract -nodoc -o $(OUTDIR)/mypub $<
 
 $(OUTDIR)/publications.html : $(OUTDIR)/mypub.html ../index.jinja
 	python mypub2jinja.py $^ $(OUTDIR)/publications.html
