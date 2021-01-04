@@ -1,4 +1,4 @@
-OUTDIR=$(shell pwd)
+OUTDIR=.
 
 $(OUTDIR)/mypub.html : mypub.bib $(OUTDIR)/.dirstamp
 	bibtex2html -nodoc -o $(OUTDIR)/mypub $<
