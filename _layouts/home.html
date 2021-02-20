@@ -11,7 +11,7 @@ layout: default
 {%- if site.posts.size > 0 -%}
   <ul class="posts">
     <li class="posts-labelgroup" id="posts-labelgroup">
-      <h1 id="posts-label">posts</h1>
+      <h1 id="posts-label">Posts</h1>
       {% if site.plainwhite.search %}
       <div class="search-container">
         <div class="search-section">
@@ -37,7 +37,7 @@ layout: default
           {%- if post.categories.size > 0-%}
           <ul class="post-categories">
             {%- for tag in post.categories -%}
-              <li><a href="/categories.html#{{ tag }}">{{ tag }}</a></li>
+              <li><a href="/category/{{ tag }}">{{ tag }}</a></li>
             {%- endfor -%}
           </ul>
           {%- endif -%}
@@ -52,9 +52,516 @@ layout: default
         </div>
       </li>
     {%- endfor -%}
-  </ul>
 
-  <!-- <p class="feed-subscribe"><svg class="svg-icon orange">
-		<use xlink:href="{{ '/assets/minima-social-icons.svg#rss' | relative_url }}"></use>
-	</svg><a href="{{ "/feed.xml" | relative_url }}">Subscribe</a></p> -->
 {%- endif -%}
+    <li style="clear:right">
+        <a href="https://arxiv.org/abs/1802.02274v1">
+        <h2 class="post-title"> A Critical Investigation of Deep Reinforcement Learning for Navigation</h2>
+        </a>
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                Jan 1, 2018
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/papers">papers</a></li>
+            </ul>
+        </div>
+        <div class="post">
+            <!-- [Paper](https://arxiv.org/abs/1802.02274v1) https://openreview.net/forum?id=BkiIkBJ0b) 
+                 &nbsp;|&nbsp;
+            -->
+        <a href="https://arxiv.org/abs/1802.02274v1">Paper</a>,
+        <a href="https://github.com/umrobotslang/does-drl-learn-to-navigate">Code</a>
+
+
+        <p>
+            We find the Deep Reinforcement Learning for Navigation does not navigate on new maps.
+
+        </p>
+        <br/>
+        <br/>
+        <p>
+            <style>
+             img.float-right {
+                 float:right;width:50%;min-width:200px
+             }
+            </style>
+            <img class="float-right" src="http://www-personal.umich.edu/~dhiman/images/critical-investigation.png" />
+            The navigation problem is classically approached in two steps: an exploration step, where map-information about the environment is gathered; and an exploitation step, where this information is used to navigate efficiently. Deep reinforcement learning (DRL) algorithms, alternatively, approach the problem of navigation in an end-to-end fashion. Inspired by the classical approach, we ask whether DRL algorithms are able to inherently explore, gather and exploit map-information over the course of navigation. We build upon Mirowski et al. [2017] work and introduce a systematic suite of experiments that vary three parameters: the agent's starting location, the agent's target location, and the maze structure. We choose evaluation metrics that explicitly measure the algorithm's ability to gather and exploit map-information. Our experiments show that when trained and tested on the same maps, the algorithm successfully gathers and exploits map-information. However, when trained and tested on different sets of maps, the algorithm fails to transfer the ability to gather and exploit map-information to unseen maps. Furthermore, we find that when the goal location is randomized and the map is kept static, the algorithm is able to gather and exploit map-information but the exploitation is far from optimal. We open-source our experimental suite in the hopes that it serves as a framework for the comparison of future algorithms and leads to the discovery of robust alternatives to classical navigation methods. 
+        </p>
+
+
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Lecture on Probabilistic Graphical Models
+            </h2>
+        </a>
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                Nov 9, 2017
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/teaching">teaching</a></li>
+            </ul>
+        </div>
+        <div class="post">
+            A guest lecture on PGMs in <a href="http://web.eecs.umich.edu/~jjcorso/t/542W17/" >Advanced Topics in Computer Vision</a>
+                <iframe width="600" height="400" src="http://www-personal.umich.edu/~dhiman/eecs442/20171109.html" ></iframe>
+        </div>
+    </li>
+
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                A Continuous Occlusion Model for Road Scene Understanding 
+            </h2>
+        </a>
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                June 1, 2016
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/papers">papers</a></li>
+            </ul>
+        </div>
+        <div class="post">
+            <a href="http://www-personal.umich.edu/~dhiman/images/continuousocclusion.pdf" >Paper</a>,
+            <a href="http://www-personal.umich.edu/~dhiman/images/supplementarymaterial.pdf">Supplementary</a>,
+            <a href="publications/mypub_bib.html#DhTrCoCVPR2016">Bibtex</a>
+
+
+            <p>
+                We propose to model cars as transparent ellipsoids rather cuboids to handle occlusion probabilistically.
+            </p>
+
+            <p>
+                <img class="float-right" src="images/figure1.png" />
+                We present a physically interpretable, continuous three-dimensional (3D) model for handling occlusions with applications to road scene understanding. We probabilistically assign each point in space to an object with a theoretical modeling of the reflection and transmission probabilities for the corresponding camera ray. Our modeling is unified in handling occlusions across a variety of scenarios, such as associating structure from motion (SFM) point tracks with potentially occluding objects or modeling object detection scores in applications such as 3D localization. For point track association, our model uniformly handles static and dynamic objects, which is an advantage over motion segmentation approaches traditionally used in multibody SFM. Detailed experiments on the KITTI raw dataset show the superiority of the proposed method over both state-of-the-art motion segmentation and a baseline that heuristically uses detection bounding boxes for resolving occlusions. We also demonstrate how our continuous occlusion model may be applied to the task of 3D localization in road scenes.
+            </p>
+
+        </div>
+    </li>
+
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Pinhole camera workshop for middle school students
+            </h2>
+        </a>
+
+            <div class="post-meta">
+                <div class="post-date">
+                    <i class="icon-calendar"></i>
+                    June 25, 2015
+                </div>
+                <ul class="post-categories">
+                    <li><a href="/category/outreach">outreach</a></li>
+                </ul>
+            </div>
+            <div class="post">
+                <a href="http://www-personal.umich.edu/~dhiman/xplore-workshop/pinhole.pdf">Presentation</a>
+
+                <p>
+                <a data-flickr-embed="true" data-footer="true" data-context="true" href="https://www.flickr.com/photos/xploreengineering/36593276425/in/album-72157685156089250/" title="Computer Imaging: Build Your Own Camera | Thursday June 25 | Session Two"><img src="https://live.staticflickr.com/4412/36593276425_a933de18b1.jpg" width="500" height="333" alt="Computer Imaging: Build Your Own Camera | Thursday June 25 | Session Two"></a><script async src="//embedr.flickr.com/assets/client-code.js" charset="utf-8"></script>
+                </p>
+
+            </div>
+    </li>
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Modern MAP algorithms for occupancy grid mapping 
+            </h2>
+        </a>
+
+            <div class="post-meta">
+                <div class="post-date">
+                    <i class="icon-calendar"></i>
+                    June, 2014
+                </div>
+                <ul class="post-categories">
+                    <li><a href="/category/papers">papers</a></li>
+                </ul>
+            </div>
+            <div class="post">
+
+                <p><a href="http://www-personal.umich.edu/~dhiman/images/modern_map.pdf">Paper</a>,
+                    <a href="publications/mypub_bib.html">Bibtex</a>,
+                    <a href="https://github.com/wecacuee/modern-occupancy-grid">Code</a></p>
+
+
+                <p>
+We propose to use modern graphical model inference techniques like Dual
+Decomposition and Belief Propagation for occupancy grid mapping.
+                </p>
+
+                <p>
+                    <img class="float-right" src="http://www-personal.umich.edu/~dhiman/images/factorgraph3.svg"  />
+Using the inverse sensor model has been popular in occupancy grid mapping. 
+However, it is widely known that applying the inverse sensor model to mapping 
+requires certain assumptions that are not necessarily true. Even the works
+that use forward sensor models have relied on methods like expectation
+maximization or Gibbs sampling which have been succeeded by more effective
+methods of maximum a posteriori (MAP) inference over graphical models. In this
+paper, we propose the use of modern MAP inference methods along with the
+forward sensor model. Our implementation and experimental results demonstrate
+that these modern inference methods deliver more accurate maps more
+efficiently than previously used methods.
+                </p>
+
+            </div>
+    </li>
+
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Voxel Planes 
+            </h2>
+        </a>
+            <div class="post-meta">
+                <div class="post-date">
+                    <i class="icon-calendar"></i>
+                    Nov, 2013
+                </div>
+                <ul class="post-categories">
+                    <li><a href="/category/papers">papers</a></li>
+                </ul>
+            </div>
+            <div class="post">
+
+                <p><a href="http://www.cse.buffalo.edu/~jryde/publications/iros2013_voxel_planes.pdf">Paper</a>, <a href="publications/mypub_bib.html">Bibtex</a>, <a href="http://www-personal.umich.edu/~dhiman/voxelplanes/presentation.html">Presentation</a>, <a href="https://bitbucket.org/wecacuee/voxelplanes">Code</a></p>
+
+
+                <p>
+                    We propose using small planes inside voxels to model 3D surfaces and
+                    corresponding algorithms to reconstruct them fast and accurately.
+                </p>
+                <p>
+                    <img class="float-right" src="images/voxel_planes_90.jpg"  />
+                    Our voxel planes approach first computes the PCA over the points inside a voxel, combining these PCA results across 2x2x2 voxel neighborhoods in a sliding window.  Second, the smallest eigenvector and voxel centroid define a plane which is intersected with the voxel to reconstruct the surface patch (3-6 sided convex polygon) within that voxel.  By nature of their construction these surface patches tessellate to produce a surface representation of the underlying points.
+                </p>
+                <p>
+                    In experiments on public datasets the voxel planes method is 3 times faster than marching cubes, offers 300 times better compression than Greedy Projection, 10 fold lower error than marching cubes whilst allowing incremental map updates.
+                </p>
+            </div>
+
+    </li>
+
+
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Kinfu based localization for Augmented Reality 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                Nov, 2012
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+            <p>
+                Used Kinect Fusion based camera localization from PCL library to render
+                augmented reality (using VTK) that enables user to add markers to describe
+                arbitrary objects in 3D.
+            </p>
+
+            <p>
+                <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" style="max-width:560px" height="315" src="//www.youtube-nocookie.com/embed/J62VZ7DGZfc" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </p>
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Head tracking using RGBD at Hackathon 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                Oct, 2012
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+            <p>
+
+<p><a href="https://bitbucket.org/wecacuee/headtracker/">Code</a></p>
+            </p>
+            <p>
+We used OpenCV face detector, KLT feature tracker, VTK visualizer to 
+cook up a head tracker at UB Hackathon 2013 within 24 hours.
+            </p>
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" style="max-width:560px" height="315" src="//www.youtube-nocookie.com/embed/UlOsM9wbi3Y" frameborder="0" allowfullscreen></iframe>
+</div>
+
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Mutual Localization 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                Nov, 2013
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+
+            <p><a href="http://www.cse.buffalo.edu/~jryde/publications/iros2013_mutual_localization.pdf">Paper</a>, <a href="publications/mypub_bib.html">Bibtex</a>, <a href="http://www-personal.umich.edu/~dhiman/mutloc/presentation.html">Presentation</a>, <a href="https://mutual-localization.readthedocs.io/en/latest/intro.html">Code</a></p>
+            <p>
+
+We propose 3-point algorithm for two cameras to localize each other in 6-DOF. It
+is a generalization of Perspective-3-Point algorithm when the 3-Points are
+distributed and observed in two separate camera frames.
+            </p>
+
+            <p>
+<img src="images/mathdiag.png" alt="img" class="float-right" />
+Concurrently estimating the 6-DOF pose of multiple cameras or
+robots---cooperative localization---is a core problem in contemporary
+robotics.  Current works focus on a set of mutually observable world landmarks
+and often require inbuilt egomotion estimates; situations in which both
+assumptions are violated often arise, for example, robots with erroneous low
+quality odometry and IMU exploring an unknown environment.  In contrast to
+these existing works in cooperative localization, we propose a cooperative
+localization method, which we call \textit{mutual localization}, that uses
+reciprocal observations of camera-fiducials to obviate the need for egomotion
+estimates and mutually observable world landmarks.  We formulate and solve an
+algebraic formulation for the pose of the two camera mutual localization setup
+under these assumptions.  Our experiments demonstrate the capabilities of our
+proposal egomotion-free cooperative localization method: for example, the
+method achieves 2cm range and 0.7 degree accuracy at 2m sensing for 6-DOF
+pose.  To demonstrate the applicability of the proposed work, we deploy our
+method on Turtlebots and we compare our results with ARToolKit and Bundler,
+over which our method achieves a 10 fold improvement in translation
+estimation accuracy.
+            </p>
+
+    <div class="embed-responsive embed-responsive-16by9">
+    <iframe class="embed-responsive-item" style="max-width:560px" height="315" src="//www.youtube-nocookie.com/embed/9R546nuWPWA" frameborder="0" allowfullscreen></iframe>
+    </div>
+        </div>
+    </li>
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Multi-Resolution Occupied Voxel Lists 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                Jan - Jun 2012
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+
+<p>Added a few features like ROS support, support for color voxels to <a href="https://launchpad.net/mrol">MROL</a> library by Dr. Julian Ryde.</p>
+
+<div class="embed-responsive embed-responsive-16by9">
+<iframe class="embed-responsive-item" style="max-width:560px" height="315" src="//www.youtube-nocookie.com/embed/rJZJS2a9V_0" frameborder="0" allowfullscreen></iframe>
+</div> 
+
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Work Experience  
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                2008-2011
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+
+At DE Shaw, I have worked on various small automation projects like Web robots, web scrapers, feeds parsers etc. Most of the these applications were written in Perl and a few in Python.
+
+Apart from this I have also worked on a simple web application using J2EE. I used Hibernate, Struts 2 and Spring for the web application.
+        </div>
+    </li>
+
+
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Biped Robot 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                (July 2007-May 2008)
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+
+            <a href="http://www-personal.umich.edu/~dhiman/biped-robot/index.html">
+<img class="float-right" 
+src='images/biped_VRML_snapshot.jpg'/></a>
+
+Our aim for final year project was to design and fabricate a 12 DOF freedom biped that could be used for further development and testing on walking robots. However, due to unforeseen financial constraints we decided to fallback to the fabrication a 4 DOF biped.
+
+I was responsible in the mechanical design and simulation of the robot. 
+
+<a href='http://www-personal.umich.edu/~dhiman/biped-robot/index.html' /> More ...  </a>
+
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Spherical Stepper Motor 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                June-August 2008
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+
+<a 
+    href='http://www-personal.umich.edu/~dhiman/spherical-stepper-motor/index.html' >
+<img  class='float-right' src='images/ssm_stator.JPG'/>
+</a>
+A motor that could rotate around any axis of rotation passing through its center.
+
+The aim of this project was to fabricate a spherical stepper motor using strategic positioning of electromagnets on the rotor and permanent magnets on the stator.
+
+The strategy of pole placement was inspired by  a paper titled "Kinematic Design and Commutation of a Spherical Stepper Motor" from Gregory S. Chirikjian and David Stein.
+
+<a href="http://www-personal.umich.edu/~dhiman/spherical-stepper-motor/index.html" >
+More ...
+</a>
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Refreshable Braille Display 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                June 2007
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+An 8 character electronic BRAILLE display, that could be controlled using a PC. This project was an application of the knowledge that gained while fabrication of "Moving message display" in the first year of my B.Tech. 
+
+The idea was to replace LED's of the "Moving message display" with electromechanical tangible "points" that could be turned on and off to create braille characters. Each character had 6 points and the unit was designed to have 6 characters. The complete unit was controlled through a parallel port of a PC.
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Grid Crossing Robot 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                December 2006
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+
+
+            <a href='http://www-personal.umich.edu/~dhiman/grid-crossing-robot/index.html' >
+<img class="float-right"  src='images/grid_crossing_robot.jpg'/>
+</a>
+
+A machine for robotic competition called _GRIP_ in _TECHFEST'06_, annual technical festival of IIT Bombay. 
+
+The task provided in the competition was to make a wired/wireless remote controlled machine, which can traverse a
+grid 1250 mm high, collect a cylindrical object located at a specific
+point below the grid, and then place the cylinder in the hollow
+cylindrical container provided.
+
+<a href='http://www-personal.umich.edu/~dhiman/grid-crossing-robot/index.html' > More ...  </a>
+        </div>
+    </li>
+    <li style="clear:right">
+        <a href="">
+            <h2 class="post-title">
+                Moving message display 
+            </h2>
+        </a>
+
+        <div class="post-meta">
+            <div class="post-date">
+                <i class="icon-calendar"></i>
+                February 2005
+            </div>
+            <ul class="post-categories">
+                <li><a href="/category/demos">demos</a></li>
+            </ul>
+        </div>
+        <div class="post">
+A PC controlled moving message display. This project was my first fabrication of an electronic circuit. The circuit design and construction was directly taken from an Electronics for you construction article in December 2004 issue titled <a rel='nofollow' target='_blank' href='http://www.efymagonline.com/data.asp?id=61'>Moving
+ Message Over Dot-Matrix Display</a> .
+        </div>
+    </li>
+  </ul>

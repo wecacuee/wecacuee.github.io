@@ -9,7 +9,7 @@ show_excerpts: true
 # Build settings
 markdown: kramdown
 permalink: pretty
-paginate: 3
+paginate: 10
 
 
 header_pages:
