@@ -19,9 +19,34 @@
 
     <script type="text/javascript">
      function networkFromFile() {
-        let edges_list = [];
+         // create an array with nodes
+         let nodes = new vis.DataSet([]);
+
+         // create an array with edges
+         let edges = new vis.DataSet([]);
+
+         // create a network
+         const container = document.getElementById("mynetwork");
+         const data = {
+             nodes: nodes,
+             edges: edges,
+         };
+         const options = {
+             nodes : {
+                 font:  { size : 6 },
+                 scaling : {
+                     max : 12,
+                     label: false
+                 }},
+             edges : {
+                 font: { size: 6 }
+             },
+             layout: {
+                 improvedLayout: false
+             }
+         };
+         var network = new vis.Network(container, data, options);
         let node_label_to_id = new Map();
-        let nodes_list = [];
         const reader = new FileReader();
         reader.addEventListener("load", function (event) {
             let lines = this.result.split('\n');
@@ -34,51 +59,23 @@
                 let nameid = 0;
                 let orgid = 0;
                 if ( ! node_label_to_id.has(name)) {
-                    nameid = nodes_list.length;
+                    nameid = nodes.length;
                     node_label_to_id.set(name, nameid);
-                    nodes_list.push({id: nameid, label: name, color: '#ff0000' });
+                    nodes.add([{id: nameid, label: name, color: '#ff0000' }]);
                 } else {
                     nameid = node_label_to_id.get(name);
                 }
 
 
                 if ( ! node_label_to_id.has(org)) {
-                    orgid = nodes_list.length;
+                    orgid = nodes.length;
                     node_label_to_id.set(org, orgid);
-                    nodes_list.push({id: orgid, label: org, color: '#00ff00'});
+                    nodes.add([{id: orgid, label: org, color: '#00ff00'}]);
                 } else {
                     orgid = node_label_to_id.get(org);
                 }
-                edges_list.push({from: nameid, to: orgid, title: pos});
+                edges.add([{from: nameid, to: orgid, title: pos}]);
             }
-
-            // create an array with nodes
-            const nodes = new vis.DataSet(nodes_list);
-
-            // create an array with edges
-            const edges = new vis.DataSet(edges_list);
-
-            // create a network
-            var container = document.getElementById("mynetwork");
-            var data = {
-                nodes: nodes,
-                edges: edges,
-            };
-            var options = {
-                nodes : {
-                    font:  { size : 6 },
-                    scaling : {
-                        max : 12,
-                        label: false
-                    }},
-                edges : {
-                    font: { size: 6 }
-                },
-                layout: {
-                    improvedLayout: false
-                }
-            };
-            var network = new vis.Network(container, data, options);
         }, false);
          const file = document.querySelector('input[type=file]').files[0];
          if (file) {
