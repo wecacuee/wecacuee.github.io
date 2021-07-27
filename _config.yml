@@ -24,10 +24,8 @@ plugins:
 plainwhite:
   name: Vikas Dhiman
   tagline: |
-     Postdoc @ UCSD
-     Prof Henrik Christensen
-     Prof Nikolay Atanasov
-     AI, Robotics,
+     Asst Prof @ UMaine
+     Robotics, Autonomous Vehicles,
      Machine Learning
 
   navigation:
