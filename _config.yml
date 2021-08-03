@@ -1,6 +1,6 @@
 url: https://wecacuee.github.io
 theme: plainwhite
-remote_theme: thelehhman/plainwhite-jekyll
+remote_theme:  samarsault/plainwhite-jekyll
 title: Vikas Dhiman
 author: Vikas Dhiman
 description: Professional website
@@ -28,9 +28,11 @@ plainwhite:
      Robotics, Autonomous Vehicles,
      Machine Learning
 
+  sitemap: true
+
   navigation:
     - title: Contact
-      url: ./contact.html
+      url: "/contact"
     - title: Resume
       url: "/images/resume.pdf"
     - title: Scholar
