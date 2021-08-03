@@ -24,7 +24,7 @@ plugins:
 plainwhite:
   name: Vikas Dhiman
   tagline: |
-     Asst Prof @ UMaine
+     Asst Prof @ ECE-UMaine
      Robotics, Autonomous Vehicles,
      Machine Learning
 
@@ -39,6 +39,8 @@ plainwhite:
       url: http://keys.gnupg.net/pks/lookup?op=get&search=0xB111F9DBEFC3DD0E
     - title: Publications
       url: publications/mypub.html
+    - title: Calendar
+      url: https://calendar.google.com/calendar/u/0?cid=dmlrYXMuZGhpbWFuQG1haW5lLmVkdQ
 
   portfolio_image: images/mugshot-hyd-flowers.png
     
