@@ -13,7 +13,7 @@ paginate: 10
 
 
 header_pages:
-  - about.md
+  - contact.md
   - publications/mypub.html
 
 
@@ -29,8 +29,8 @@ plainwhite:
      Machine Learning
 
   navigation:
-    - title: vikas.dhiman [@T] maine [D0T] edu
-      url: "mailto:vikas.dhiman [@T] maine [D0T] edu"
+    - title: Contact
+      url: ./contact.html
     - title: Resume
       url: "/images/resume.pdf"
     - title: Scholar
@@ -48,3 +48,4 @@ plainwhite:
   social_links:
     github: wecacuee
     twitter: VikasDhimanR
+    email: vikas.dhiman@maine.edu
