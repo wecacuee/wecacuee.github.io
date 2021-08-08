@@ -5,27 +5,7 @@ date:   2021-08-08
 categories: teaching
 ---
 
-# ECE 275 --- Sequential Logic Systems
-## Fall 2021
-
-
-Instructors: 	Vikas Dhiman, 105 Barrows, 581-2222, vikas.dhiman@maine.edu
-    Office Hours: 4-5:30pm MWF most likely, but feel free to try me anytime during the day
-Credits: 3 credits
-Web page: https://vikasdhiman.info/ECE275-Sequential-Logic
-The course is mostly based on Prof Richard Eason's last year [course](http://web.eece.maine.edu/eason/ece275/).
-Text: Fundamentals of Digital Logic with Verilog Design (3rd ed.) by Brown and Vranesic
-Prerequisite: ECE 177
-
-### Grading:
-
-    Grades are based on the following:
-        - Homework 20%, and Labs 15% -- 35% total
-        - Two prelims (about Oct. 5 and about Nov. 9) and quizzes -- 45%
-        - Final (Comprehensive) -- 20%
-
-    There will be no make-ups for missed exams.  Plan to be there.
-    Late work -- generally not accepted without good reason.
+The course syllabus is posted and the [course website](https://vikasdhiman.info/ECE275-Sequential-Logic) is up.
 
 ### Approximate Course Outline:
 
@@ -42,6 +22,31 @@ Prerequisite: ECE 177
     - Analysis of clocked sequential networks.
     - State tables (derivation, reduction, and state assignment).
     - Finite state machine optimization.
+
+### Admnistrative Details
+
+Instructors: 	Vikas Dhiman, 105 Barrows, 581-2222, [`vikas.dhiman@maine.edu`](mailto:vikas.dhiman@maine.edu)
+
+Office Hours: 4-5:30pm MWF most likely, but feel free to try me anytime during the day
+
+Credits: 3 credits
+
+Web page: https://vikasdhiman.info/ECE275-Sequential-Logic
+The course is mostly based on Prof Richard Eason's last year [course](http://web.eece.maine.edu/eason/ece275/).
+
+Text: Fundamentals of Digital Logic with Verilog Design (3rd ed.) by Brown and Vranesic
+Prerequisite: ECE 177
+
+### Grading:
+
+    Grades are based on the following:
+        - Homework 20%, and Labs 15% -- 35% total
+        - Two prelims (about Oct. 5 and about Nov. 9) and quizzes -- 45%
+        - Final (Comprehensive) -- 20%
+
+    There will be no make-ups for missed exams.  Plan to be there.
+    Late work -- generally not accepted without good reason.
+
 
 ### Tests
 Tests will be closed book, with one A4 size paper as cheat-sheet allowed. Calculators will neither be needed nor allowed.
