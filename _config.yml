@@ -30,6 +30,10 @@ plainwhite:
 
   sitemap: true
 
+  search: true
+
+  html_lang: "en"
+
   navigation:
     - title: Contact
       url: "/contact"
