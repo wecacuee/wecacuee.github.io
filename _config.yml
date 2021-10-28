@@ -37,14 +37,16 @@ plainwhite:
   navigation:
     - title: Contact
       url: "/contact"
+    - title: Publications
+      url: publications/mypub.html
+    - title: Teaching
+      url: "/teaching"
     - title: Calendar
       url: https://calendar.google.com/calendar/embed?src=vikas.dhiman%40maine.edu&ctz=America%2FNew_York
     - title: Resume
       url: "/images/resume.pdf"
     - title: Scholar
       url: https://scholar.google.com/citations?user=6Pn0FGUAAAAJ&hl=en
-    - title: Publications
-      url: publications/mypub.html
 
   portfolio_image: images/mugshot-hyd-flowers.png
     
