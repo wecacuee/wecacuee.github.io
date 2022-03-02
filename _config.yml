@@ -1,5 +1,4 @@
 url: https://vikasdhiman.info
-theme: plainwhite
 remote_theme:  samarsault/plainwhite-jekyll
 title: Vikas Dhiman
 author: Vikas Dhiman
@@ -20,6 +19,8 @@ header_pages:
 plugins:
   - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-feed
+  - jekyll-remote-theme
 
 plainwhite:
   name: Vikas Dhiman
