@@ -1,5 +1,5 @@
 url: https://vikasdhiman.info
-remote_theme:  samarsault/plainwhite-jekyll
+remote_theme:  wecacuee/plainwhite-jekyll
 title: Vikas Dhiman
 author: Vikas Dhiman
 description: Professional website
@@ -56,3 +56,6 @@ plainwhite:
     github: wecacuee
     twitter: VikasDhimanR
     email: vikas.dhiman@maine.edu
+    mastodon:
+      - username: vikasdhimanpkl
+        instance: sigmoid.social
