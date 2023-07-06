@@ -49,9 +49,10 @@ plainwhite:
       url: "/images/resume.pdf"
     - title: Scholar
       url: https://scholar.google.com/citations?user=6Pn0FGUAAAAJ&hl=en
+    - title: Freshmen Advising
+      url: "/freshmen-advising"
 
   portfolio_image: images/mugshot-hyd-flowers.png
-    
 
   social_links:
     github: wecacuee
