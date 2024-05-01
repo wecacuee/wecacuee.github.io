@@ -2,9 +2,6 @@
 
 ## Frequently asked questions
 
-* Maine FAQ
-   <https://go.umaine.edu/transfer-to-umaine/frequently-asked-questions/>
-
 * How can I transfer credits?
 
     Check if the course from your previous instucan be transferred (equivalent courses)
