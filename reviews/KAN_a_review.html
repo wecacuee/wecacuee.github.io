@@ -1,0 +1,404 @@
+<!DOCTYPE html><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>KAN: Kolmogorov–Arnold Networks: A review </title>
+<!--Generated on Wed May  8 12:12:58 2024 by LaTeXML (version 0.8.6) http://dlmf.nist.gov/LaTeXML/.-->
+
+<link rel="stylesheet" href="LaTeXML.css" type="text/css">
+<link rel="stylesheet" href="ltx-article.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+<div class="ltx_page_main">
+<div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">KAN: Kolmogorov–Arnold Networks: A review </h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Vikas Dhiman
+</span></span>
+</div>
+
+<section id="S0.SS0.SSS0.Px1" class="ltx_paragraph">
+<h2 class="ltx_title ltx_title_paragraph">Why review this?</h2>
+
+<div id="S0.SS0.SSS0.Px1.p1" class="ltx_para">
+<p class="ltx_p">On Apr 30, 2024, <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="KAN: kolmogorov-arnold networks" class="ltx_ref">5</a>]</cite> appears on ArXiV and by May 7th, I have heard about this paper from multiple students, from whom I do not hear about new papers.
+It must be special, I thought.
+I decided to take a look.</p>
+</div>
+<div id="S0.SS0.SSS0.Px1.p2" class="ltx_para">
+<p class="ltx_p">If I was professionally reviewing this paper, I would accept the paper with major revisions. The paper has enough contributions to deserve a publication. But some of the claims need to be toned down, interpretations need to be clarified and comparisons with spline based neural networks be made.
+</p>
+</div>
+</section>
+<section id="S0.SS0.SSS0.Px2" class="ltx_paragraph">
+<h2 class="ltx_title ltx_title_paragraph">Outline</h2>
+
+<div id="S0.SS0.SSS0.Px2.p1" class="ltx_para">
+<p class="ltx_p">I make 4 major critques of the paper</p>
+<ol id="S0.I1" class="ltx_enumerate">
+<li id="S0.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S0.I1.i1.p1" class="ltx_para">
+<p class="ltx_p">MLPs have learnable activation functions as well</p>
+</div>
+</li>
+<li id="S0.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S0.I1.i2.p1" class="ltx_para">
+<p class="ltx_p">The content of the paper does not justify the name, Kolmogorov-Arnold networks (KANs).</p>
+</div>
+</li>
+<li id="S0.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span> 
+<div id="S0.I1.i3.p1" class="ltx_para">
+<p class="ltx_p">KANs are MLPs with spline-basis as the activation function.</p>
+</div>
+</li>
+<li id="S0.I1.i4" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">4.</span> 
+<div id="S0.I1.i4.p1" class="ltx_para">
+<p class="ltx_p">KANs do not beat the curse of dimensionality.</p>
+</div>
+</li>
+</ol>
+</div>
+</section>
+<section id="S0.SS0.SSS0.Px3" class="ltx_paragraph">
+<h2 class="ltx_title ltx_title_paragraph">MLPs have learnable activation functions as well</h2>
+
+<div id="S0.SS0.SSS0.Px3.p1" class="ltx_para">
+<p class="ltx_p">The authors claim in the abstract,</p>
+<blockquote class="ltx_quote">
+<p class="ltx_p">While MLPs have fixed activation functions on nodes (“neurons”), KANs have learnable activation functions on edges (“weights”). KANs have no linear weights at all – every weight parameter is replaced by a univariate function parametrized as a spline.</p>
+</blockquote>
+</div>
+<div id="S0.SS0.SSS0.Px3.p2" class="ltx_para">
+<p class="ltx_p">This is not a helpful description because one can interpret MLPs as having “learnable activation functions” as well; it depends on the definition what you call the “activation function“. Consider a two layer MLP with input <math id="S0.SS0.SSS0.Px3.p2.m1" class="ltx_Math" alttext="\mathbf{x}\in\mathbb{R}^{n}" display="inline"><mrow><mi>𝐱</mi><mo>∈</mo><msup><mi>ℝ</mi><mi>n</mi></msup></mrow></math>, weights <math id="S0.SS0.SSS0.Px3.p2.m2" class="ltx_Math" alttext="W_{1}" display="inline"><msub><mi>W</mi><mn>1</mn></msub></math>, <math id="S0.SS0.SSS0.Px3.p2.m3" class="ltx_Math" alttext="W_{2}" display="inline"><msub><mi>W</mi><mn>2</mn></msub></math> (ignore biases for now) and activation function <math id="S0.SS0.SSS0.Px3.p2.m4" class="ltx_Math" alttext="\sigma" display="inline"><mi>σ</mi></math>,</p>
+<table id="S0.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E1.m1" class="ltx_Math" alttext="\displaystyle f(\mathbf{x})" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E1.m2" class="ltx_Math" alttext="\displaystyle=W_{2}\sigma(W_{1}\mathbf{x})=W_{2}\phi_{1}(\mathbf{x})." display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><msub><mi>W</mi><mn>2</mn></msub><mo>⁢</mo><mi>σ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>W</mi><mn>1</mn></msub><mo>⁢</mo><mi>𝐱</mi></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>W</mi><mn>2</mn></msub><mo>⁢</mo><msub><mi>ϕ</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">If I define <math id="S0.SS0.SSS0.Px3.p2.m5" class="ltx_Math" alttext="\phi_{1}(\mathbf{x})=\sigma(W_{1}\mathbf{x})" display="inline"><mrow><mrow><msub><mi>ϕ</mi><mn>1</mn></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>σ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>W</mi><mn>1</mn></msub><mo>⁢</mo><mi>𝐱</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math> and call <math id="S0.SS0.SSS0.Px3.p2.m6" class="ltx_Math" alttext="\phi_{1}(.)" display="inline"><mrow><msub><mi>ϕ</mi><mn>1</mn></msub><mrow><mo stretchy="false">(</mo><mo>.</mo><mo stretchy="false">)</mo></mrow></mrow></math> as the activation function, then I have a learnable activation function in an MLP.
+Same with Figure 0.1, it is a <em class="ltx_emph ltx_font_italic">reinterpretation</em>, not <em class="ltx_emph ltx_font_italic">redesign</em> of MLPs as claimed.</p>
+</div>
+</section>
+<section id="S0.SS0.SSS0.Px4" class="ltx_paragraph">
+<h2 class="ltx_title ltx_title_paragraph">What’s in the name</h2>
+
+<div id="S0.SS0.SSS0.Px4.p1" class="ltx_para">
+<p class="ltx_p">How do KAN’s actually use Kolmogorov-Arnold Theorem (KAT)? The theorem is not actually useful
+in the development of KANs. KANs are only inspired by KAT not based on it.
+</p>
+</div>
+<div id="S0.SS0.SSS0.Px4.p2" class="ltx_para">
+<p class="ltx_p">So what is Kolmogorov-Arnold Theorem? The paper describes it as the decomposition of any smooth function <math id="S0.SS0.SSS0.Px4.p2.m1" class="ltx_Math" alttext="f:[0,1]^{n}\to\mathbb{R}" display="inline"><mrow><mi>f</mi><mo>:</mo><mrow><msup><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mi>n</mi></msup><mo>→</mo><mi>ℝ</mi></mrow></mrow></math> in terms of finite basis function <math id="S0.SS0.SSS0.Px4.p2.m2" class="ltx_Math" alttext="\phi^{(2)}_{q}:\mathbb{R}\to\mathbb{R}" display="inline"><mrow><msubsup><mi>ϕ</mi><mi>q</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>:</mo><mrow><mi>ℝ</mi><mo>→</mo><mi>ℝ</mi></mrow></mrow></math><span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup>
+            <span class="ltx_tag ltx_tag_note">1</span>
+            
+            
+          Slight change in notation from the paper</span></span></span> and <math id="S0.SS0.SSS0.Px4.p2.m3" class="ltx_Math" alttext="\phi_{q,p}:[0,1]\to\mathbb{R}" display="inline"><mrow><msub><mi>ϕ</mi><mrow><mi>q</mi><mo>,</mo><mi>p</mi></mrow></msub><mo>:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo>→</mo><mi>ℝ</mi></mrow></mrow></math>.</p>
+<table id="S0.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E2.m1" class="ltx_Math" alttext="\displaystyle f(\mathbf{x})=f(x_{1},\dots,x_{n})=\sum_{q=1}^{{\color[rgb]{%
+1,0,0}2n+1}}\phi^{(2)}_{q}\left(\sum_{p=1}^{n}\phi_{p,q}(x_{p})\right)." display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>q</mi><mo>=</mo><mn>1</mn></mrow><mrow><mrow><mn mathcolor="#FF0000">2</mn><mo mathcolor="#FF0000">⁢</mo><mi mathcolor="#FF0000">n</mi></mrow><mo mathcolor="#FF0000">+</mo><mn mathcolor="#FF0000">1</mn></mrow></munderover></mstyle><mrow><msubsup><mi>ϕ</mi><mi>q</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>⁢</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msub><mi>ϕ</mi><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow><mo>.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S0.SS0.SSS0.Px4.p3" class="ltx_para">
+<p class="ltx_p">If you plan to use Kolmogorov-Arnold Theorem (KAT), you have understand the central claim of the KAT theorem and how is this theorem different the nearest competitor (Universal Approximation Theorem (UAT) ). Universal approximation theorem states that any function can be approximated by a wide enough 2-layer neural network.</p>
+<table id="S0.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E3.m1" class="ltx_Math" alttext="\displaystyle f(\mathbf{x})" display="inline"><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E3.m2" class="ltx_Math" alttext="\displaystyle=\sum_{q=1}^{{\color[rgb]{1,0,0}\infty}}w^{(2)}_{q}\sigma\left(%
+\sum_{p=1}^{n}w^{(1)}_{q,p}x_{p}\right)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>q</mi><mo>=</mo><mn>1</mn></mrow><mi mathcolor="#FF0000" mathvariant="normal">∞</mi></munderover></mstyle><mrow><msubsup><mi>w</mi><mi>q</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>⁢</mo><mi>σ</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msubsup><mi>w</mi><mrow><mi>q</mi><mo>,</mo><mi>p</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>⁢</mo><msub><mi>x</mi><mi>p</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E3.m3" class="ltx_Math" alttext="\displaystyle\text{ where }W_{2}=[w^{(2)}_{q}]_{q=1}^{\infty}\text{ and }W_{1}%
+=[[w^{(1)}_{q,p}]_{q=1}^{\infty}]_{p=1}^{n}" display="inline"><mrow><mrow><mtext>where </mtext><mo>⁢</mo><msub><mi>W</mi><mn>2</mn></msub></mrow><mo>=</mo><mrow><msubsup><mrow><mo stretchy="false">[</mo><msubsup><mi>w</mi><mi>q</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">]</mo></mrow><mrow><mi>q</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mo>⁢</mo><mtext> and </mtext><mo>⁢</mo><msub><mi>W</mi><mn>1</mn></msub></mrow><mo>=</mo><msubsup><mrow><mo stretchy="false">[</mo><msubsup><mrow><mo stretchy="false">[</mo><msubsup><mi>w</mi><mrow><mi>q</mi><mo>,</mo><mi>p</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup><mo stretchy="false">]</mo></mrow><mrow><mi>q</mi><mo>=</mo><mn>1</mn></mrow><mi mathvariant="normal">∞</mi></msubsup><mo stretchy="false">]</mo></mrow><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">I wrote the MLP in terms of summation instead of matrix multiplication to draw parallels between UAT and KAT.
+There are two main differences between UAT and KAT,</p>
+<ol id="S0.I2" class="ltx_enumerate">
+<li id="S0.I2.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S0.I2.i1.p1" class="ltx_para">
+<p class="ltx_p">UAT deals with linear layers with common activation function (like sigmoid <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="Approximation by superpositions of a sigmoidal function" class="ltx_ref">3</a>]</cite>, ReLU, tanh) while KAT deals with arbitrary functions, possibly “non-smooth and even fractal”.</p>
+</div>
+</li>
+<li id="S0.I2.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S0.I2.i2.p1" class="ltx_para">
+<p class="ltx_p">UAT needs possibly infinite hidden units for exact approximation while KAT only needs <math id="S0.I2.i2.p1.m1" class="ltx_Math" alttext="2n+1" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></math> “hidden units”.</p>
+</div>
+</li>
+</ol>
+<p class="ltx_p">I would claim that central point of KAT is about needing only <math id="S0.SS0.SSS0.Px4.p3.m1" class="ltx_Math" alttext="2n+1" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></math> hidden units, otherwise it is a weaker theorem than UAT.
+Does the KAN paper make use of the <math id="S0.SS0.SSS0.Px4.p3.m2" class="ltx_Math" alttext="2n+1" display="inline"><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></math> hidden units consistently? No. But they justify rest of the paper to be based on KAT by saying,</p>
+<blockquote class="ltx_quote">
+<p class="ltx_p">However, we are more optimistic about the usefulness of the Kolmogorov-Arnold theorem for machine learning. First of all, we need not stick to the original Eq. (2.1) which has only two-layer non- linearities and a small number of terms (2n + 1) in the hidden layer: we will generalize the network to arbitrary widths and depths.</p>
+</blockquote>
+</div>
+<div id="S0.SS0.SSS0.Px4.p4" class="ltx_para">
+<p class="ltx_p">Okay. But aren’t we back to Universal approximation theorem then?</p>
+</div>
+<div id="S0.SS0.SSS0.Px4.p5" class="ltx_para">
+<p class="ltx_p">There is one aspect of KAT that the authors highlight, “In a sense, they showed that the only true multivariate
+function is addition, since every other function can be written using univariate functions and sum.” This is a cool interpretation, but this interpretation does not separate KAT from UAT that is already being used in MLPs.</p>
+</div>
+</section>
+<section id="S0.SS0.SSS0.Px5" class="ltx_paragraph">
+<h2 class="ltx_title ltx_title_paragraph">KANs are MLPs with spline-based activation functions</h2>
+
+<div id="S0.SS0.SSS0.Px5.p1" class="ltx_para">
+<p class="ltx_p">In practice, the authors end up proposing a KAN residual layer whose each scalar function is written as,</p>
+<table id="S0.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E4.m1" class="ltx_Math" alttext="\displaystyle\phi(x)" display="inline"><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E4.m2" class="ltx_Math" alttext="\displaystyle=w(\text{silu}(x)+\text{spline}(x))" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mi>w</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mtext>silu</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mtext>spline</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+<tbody id="S0.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E5.m1" class="ltx_Math" alttext="\displaystyle\text{spline}(x)" display="inline"><mrow><mtext>spline</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E5.m2" class="ltx_Math" alttext="\displaystyle=\sum_{i=1}^{G}c_{i}B_{i}(x)." display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>G</mi></munderover></mstyle><mrow><msub><mi>c</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>B</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">What are splines?<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup>
+            <span class="ltx_tag ltx_tag_note">2</span>
+            
+            
+          <a href="https://personal.math.vt.edu/embree/math5466/lecture10.pdf" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://personal.math.vt.edu/embree/math5466/lecture10.pdf</a></span></span></span> For the purpose of this section you do not need to know splines. By the way there exists a history of splines in neural networks which is not cited in this paper <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="Learning activation functions in deep (spline) neural networks" class="ltx_ref">2</a>, <a href="#bib.bib5" title="Deep neural networks with trainable activations and controlled lipschitz constant" class="ltx_ref">1</a>]</cite>.
+For now, assume splines are functions that are a result of a linear combination <math id="S0.SS0.SSS0.Px5.p1.m1" class="ltx_Math" alttext="c_{i}B_{i}(x)" display="inline"><mrow><msub><mi>c</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>B</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math> of a particular kind basis functions <math id="S0.SS0.SSS0.Px5.p1.m2" class="ltx_Math" alttext="B_{i}(x)" display="inline"><mrow><msub><mi>B</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math> (B-form splines).
+To reinterpret this scalar function as a MLP, let’s rewrite this as,</p>
+</div>
+<div id="S0.SS0.SSS0.Px5.p2" class="ltx_para">
+<table id="S0.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E6.m1" class="ltx_Math" alttext="\displaystyle\phi(x)" display="inline"><mrow><mi>ϕ</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E6.m2" class="ltx_Math" alttext="\displaystyle=\sum_{i=1}^{k}c_{i}B_{i}(x)+\text{selu}(x)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></munderover></mstyle><mrow><msub><mi>c</mi><mi>i</mi></msub><mo>⁢</mo><msub><mi>B</mi><mi>i</mi></msub><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>+</mo><mrow><mtext>selu</mtext><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+<tbody id="S0.E13"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E13.m1" class="ltx_Math" alttext="\displaystyle=\underbrace{\begin{bmatrix}\hidden@noalign{}\hfil\textstyle wc_{%
+1}&amp;wc_{2}&amp;\dots&amp;wc_{k}&amp;w\end{bmatrix}}_{\mathbf{w}^{\top}}\underbrace{\begin{%
+bmatrix}\hidden@noalign{}\hfil\textstyle B_{1}(x)\\
+\hidden@noalign{}\hfil\textstyle B_{2}(x)\\
+\hidden@noalign{}\hfil\textstyle\vdots\\
+\hidden@noalign{}\hfil\textstyle B_{G}(x)\\
+\hidden@noalign{}\hfil\textstyle\text{selu}(x)\end{bmatrix}}_{\mathbf{b}(x)}" display="inline"><mrow><mi></mi><mo>=</mo><mrow><munder><munder accentunder="true"><mrow><mo movablelimits="false">[</mo><mtable columnspacing="5pt"><mtr><mtd columnalign="center"><mrow><mi>w</mi><mo movablelimits="false">⁢</mo><msub><mi>c</mi><mn>1</mn></msub></mrow></mtd><mtd columnalign="center"><mrow><mi>w</mi><mo movablelimits="false">⁢</mo><msub><mi>c</mi><mn>2</mn></msub></mrow></mtd><mtd columnalign="center"><mi mathvariant="normal">…</mi></mtd><mtd columnalign="center"><mrow><mi>w</mi><mo movablelimits="false">⁢</mo><msub><mi>c</mi><mi>k</mi></msub></mrow></mtd><mtd columnalign="center"><mi>w</mi></mtd></mtr></mtable><mo movablelimits="false">]</mo></mrow><mo movablelimits="false">⏟</mo></munder><msup><mi>𝐰</mi><mo>⊤</mo></msup></munder><mo>⁢</mo><munder><munder accentunder="true"><mrow><mo movablelimits="false">[</mo><mtable rowspacing="0pt"><mtr><mtd columnalign="center"><mrow><msub><mi>B</mi><mn>1</mn></msub><mo movablelimits="false">⁢</mo><mrow><mo movablelimits="false" stretchy="false">(</mo><mi>x</mi><mo movablelimits="false" stretchy="false">)</mo></mrow></mrow></mtd></mtr><mtr><mtd columnalign="center"><mrow><msub><mi>B</mi><mn>2</mn></msub><mo movablelimits="false">⁢</mo><mrow><mo movablelimits="false" stretchy="false">(</mo><mi>x</mi><mo movablelimits="false" stretchy="false">)</mo></mrow></mrow></mtd></mtr><mtr><mtd columnalign="center"><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd columnalign="center"><mrow><msub><mi>B</mi><mi>G</mi></msub><mo movablelimits="false">⁢</mo><mrow><mo movablelimits="false" stretchy="false">(</mo><mi>x</mi><mo movablelimits="false" stretchy="false">)</mo></mrow></mrow></mtd></mtr><mtr><mtd columnalign="center"><mrow><mtext>selu</mtext><mo movablelimits="false">⁢</mo><mrow><mo movablelimits="false" stretchy="false">(</mo><mi>x</mi><mo movablelimits="false" stretchy="false">)</mo></mrow></mrow></mtd></mtr></mtable><mo movablelimits="false">]</mo></mrow><mo movablelimits="false">⏟</mo></munder><mrow><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></munder></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(13)</span></td>
+</tr></tbody>
+<tbody id="S0.E14"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E14.m1" class="ltx_Math" alttext="\displaystyle=\mathbf{w}^{\top}\mathbf{b}(x)." display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><msup><mi>𝐰</mi><mo>⊤</mo></msup><mo>⁢</mo><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(14)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">Here <math id="S0.SS0.SSS0.Px5.p2.m1" class="ltx_Math" alttext="\mathbf{w}" display="inline"><mi>𝐰</mi></math> contains the learnable parameters of the splines and <math id="S0.SS0.SSS0.Px5.p2.m2" class="ltx_Math" alttext="\mathbf{b}(x)" display="inline"><mrow><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math> is deterministic once the spline grid is fixed though it can be made learnable. Let’s put this back into (<a href="#S0.E2" title="(2) ‣ What’s in the name ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>),</p>
+<table id="S0.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E15"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E15.m1" class="ltx_Math" alttext="\displaystyle f(\mathbf{x})=f(x_{1},\dots,x_{n})" display="inline"><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mi mathvariant="normal">…</mi><mo>,</mo><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E15.m2" class="ltx_Math" alttext="\displaystyle=\sum_{q=1}^{2n+1}\phi^{(2)}_{q}\left(\sum_{p=1}^{n}\phi^{(1)}_{p%
+,q}(x_{p})\right)" display="inline"><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>q</mi><mo>=</mo><mn>1</mn></mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></munderover></mstyle><mrow><msubsup><mi>ϕ</mi><mi>q</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>⁢</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msubsup><mi>ϕ</mi><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(15)</span></td>
+</tr></tbody>
+<tbody id="S0.E16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S0.E16.m1" class="ltx_Math" alttext="\displaystyle=\sum_{q=1}^{2n+1}\mathbf{w}^{(2)\top}_{q}\mathbf{b}\left(\sum_{p%
+=1}^{n}\mathbf{w}^{(1)\top}_{p,q}\mathbf{b}(x_{p})\right)." display="inline"><mrow><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>q</mi><mo>=</mo><mn>1</mn></mrow><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow></munderover></mstyle><mrow><msubsup><mi>𝐰</mi><mi>q</mi><mrow><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow><mo>⊤</mo></mrow></msubsup><mo>⁢</mo><mi>𝐛</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msubsup><mi>𝐰</mi><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo>⊤</mo></mrow></msubsup><mo>⁢</mo><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow><mo>.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(16)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">This is very close to an MLP if we consider <math id="S0.SS0.SSS0.Px5.p2.m3" class="ltx_Math" alttext="\mathbf{w}" display="inline"><mi>𝐰</mi></math>s linear weights and the basis functions as activation functions, with the following differences,</p>
+<ol id="S0.I3" class="ltx_enumerate">
+<li id="S0.I3.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S0.I3.i1.p1" class="ltx_para">
+<p class="ltx_p">The activation function <math id="S0.I3.i1.p1.m1" class="ltx_Math" alttext="\mathbf{b}()" display="inline"><mrow><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mo stretchy="false">)</mo></mrow></mrow></math> is applied on the input side which is typically not a part of MLPs. However, it has been common to convert input into a set of feature vectors as a pre-processing step rather than providing MLPs the raw input.</p>
+</div>
+</li>
+<li id="S0.I3.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S0.I3.i2.p1" class="ltx_para">
+<p class="ltx_p">Unlike <math id="S0.I3.i2.p1.m1" class="ltx_Math" alttext="w^{(1)}_{p,q}" display="inline"><msubsup><mi>w</mi><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup></math> being scalar in (<a href="#S0.E3" title="(3) ‣ What’s in the name ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>), <math id="S0.I3.i2.p1.m2" class="ltx_Math" alttext="\mathbf{w}^{(1)}_{p,q}" display="inline"><msubsup><mi>𝐰</mi><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msubsup></math> is a vector in (<a href="#S0.E16" title="(16) ‣ KANs are MLPs with spline-based activation functions ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_tag">16</span></a>). This is not a problem because it is still a linear combination of processed input values through a basis function <math id="S0.I3.i2.p1.m3" class="ltx_Math" alttext="\mathbf{b}(x)" display="inline"><mrow><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow></mrow></math>.
+To make this explicit, we write (<a href="#S0.E16" title="(16) ‣ KANs are MLPs with spline-based activation functions ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_tag">16</span></a>) as a matrix vector multiplication
+followed by activation functions.</p>
+</div>
+</li>
+</ol>
+</div>
+<div id="S0.SS0.SSS0.Px5.p3" class="ltx_para">
+<p class="ltx_p">To write (<a href="#S0.E16" title="(16) ‣ KANs are MLPs with spline-based activation functions ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_tag">16</span></a>) as a matrix vector product, consider only the first
+layer term ,</p>
+<table id="S0.EGx7" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E24"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E24.m1" class="ltx_Math" alttext="\displaystyle\sum_{p=1}^{n}\mathbf{w}^{(1)\top}_{p,q}\mathbf{b}(x_{p})=%
+\underbrace{\begin{bmatrix}\hidden@noalign{}\hfil\textstyle\mathbf{w}^{(1)\top%
+}_{1,1}&amp;\dots&amp;\mathbf{w}^{(1)\top}_{1,n}\\
+\hidden@noalign{}\hfil\textstyle\mathbf{w}^{(1)\top}_{2,1}&amp;\dots&amp;\mathbf{w}^{(%
+1)\top}_{2,n}\\
+\hidden@noalign{}\hfil\textstyle\vdots&amp;\ddots&amp;\vdots\\
+\hidden@noalign{}\hfil\textstyle\mathbf{w}^{(1)\top}_{2n+1,1}&amp;\dots&amp;\mathbf{w}%
+^{(1)\top}_{2n+1,n}\\
+\end{bmatrix}_{(2n+1)\times nG}}_{\mathbf{W}^{(1)}}\underbrace{\begin{bmatrix}%
+\hidden@noalign{}\hfil\textstyle\mathbf{b}(x_{1})\\
+\hidden@noalign{}\hfil\textstyle\vdots\\
+\hidden@noalign{}\hfil\textstyle\mathbf{b}(x_{n})\end{bmatrix}_{nG\times 1}}_{%
+\mathbf{B}(\mathbf{x})}." display="inline"><mrow><mrow><mrow><mstyle displaystyle="true"><munderover><mo largeop="true" movablelimits="false" symmetric="true">∑</mo><mrow><mi>p</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover></mstyle><mrow><msubsup><mi>𝐰</mi><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><mrow><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><mo>⊤</mo></mrow></msubsup><mo>⁢</mo><mi>𝐛</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><msub><mi>x</mi><mi>p</mi></msub><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>=</mo><mrow><munder><munder accentunder="true"><msub><mrow><mo movablelimits="false">[</mo><mtable columnspacing="5pt" rowspacing="0pt"><mtr><mtd columnalign="center"><msubsup><mi>𝐰</mi><mrow><mn>1</mn><mo movablelimits="false">,</mo><mn>1</mn></mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mn>1</mn><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">⊤</mo></mrow></msubsup></mtd><mtd columnalign="center"><mi mathvariant="normal">…</mi></mtd><mtd columnalign="center"><msubsup><mi>𝐰</mi><mrow><mn>1</mn><mo movablelimits="false">,</mo><mi>n</mi></mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mn>1</mn><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">⊤</mo></mrow></msubsup></mtd></mtr><mtr><mtd columnalign="center"><msubsup><mi>𝐰</mi><mrow><mn>2</mn><mo movablelimits="false">,</mo><mn>1</mn></mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mn>1</mn><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">⊤</mo></mrow></msubsup></mtd><mtd columnalign="center"><mi mathvariant="normal">…</mi></mtd><mtd columnalign="center"><msubsup><mi>𝐰</mi><mrow><mn>2</mn><mo movablelimits="false">,</mo><mi>n</mi></mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mn>1</mn><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">⊤</mo></mrow></msubsup></mtd></mtr><mtr><mtd columnalign="center"><mi mathvariant="normal">⋮</mi></mtd><mtd columnalign="center"><mi mathvariant="normal">⋱</mi></mtd><mtd columnalign="center"><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd columnalign="center"><msubsup><mi>𝐰</mi><mrow><mrow><mrow><mn>2</mn><mo movablelimits="false">⁢</mo><mi>n</mi></mrow><mo movablelimits="false">+</mo><mn>1</mn></mrow><mo movablelimits="false">,</mo><mn>1</mn></mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mn>1</mn><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">⊤</mo></mrow></msubsup></mtd><mtd columnalign="center"><mi mathvariant="normal">…</mi></mtd><mtd columnalign="center"><msubsup><mi>𝐰</mi><mrow><mrow><mrow><mn>2</mn><mo movablelimits="false">⁢</mo><mi>n</mi></mrow><mo movablelimits="false">+</mo><mn>1</mn></mrow><mo movablelimits="false">,</mo><mi>n</mi></mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mn>1</mn><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">⊤</mo></mrow></msubsup></mtd></mtr></mtable><mo movablelimits="false">]</mo></mrow><mrow><mrow><mrow><mo movablelimits="false" stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo movablelimits="false">⁢</mo><mi>n</mi></mrow><mo movablelimits="false">+</mo><mn>1</mn></mrow><mo movablelimits="false" stretchy="false">)</mo></mrow><mo movablelimits="false">×</mo><mi>n</mi></mrow><mo movablelimits="false">⁢</mo><mi>G</mi></mrow></msub><mo movablelimits="false">⏟</mo></munder><msup><mi>𝐖</mi><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup></munder><mo>⁢</mo><munder><munder accentunder="true"><msub><mrow><mo movablelimits="false">[</mo><mtable rowspacing="0pt"><mtr><mtd columnalign="center"><mrow><mi>𝐛</mi><mo movablelimits="false">⁢</mo><mrow><mo movablelimits="false" stretchy="false">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo movablelimits="false" stretchy="false">)</mo></mrow></mrow></mtd></mtr><mtr><mtd columnalign="center"><mi mathvariant="normal">⋮</mi></mtd></mtr><mtr><mtd columnalign="center"><mrow><mi>𝐛</mi><mo movablelimits="false">⁢</mo><mrow><mo movablelimits="false" stretchy="false">(</mo><msub><mi>x</mi><mi>n</mi></msub><mo movablelimits="false" stretchy="false">)</mo></mrow></mrow></mtd></mtr></mtable><mo movablelimits="false">]</mo></mrow><mrow><mrow><mi>n</mi><mo movablelimits="false">⁢</mo><mi>G</mi></mrow><mo movablelimits="false">×</mo><mn>1</mn></mrow></msub><mo movablelimits="false">⏟</mo></munder><mrow><mi>𝐁</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow></munder></mrow></mrow><mo>.</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(24)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">You can apply this interpretation repeatedly,</p>
+<table id="S0.EGx8" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S0.E25"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S0.E25.m1" class="ltx_Math" alttext="\displaystyle f(\mathbf{x})=\mathbf{W}^{(2)}\mathbf{B}\left(\mathbf{W}^{(1)}%
+\mathbf{B}(\mathbf{x})\right)," display="inline"><mrow><mrow><mrow><mi>f</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mi>𝐁</mi><mo>⁢</mo><mrow><mo>(</mo><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo>⁢</mo><mi>𝐁</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow><mo>)</mo></mrow></mrow></mrow><mo>,</mo></mrow></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(25)</span></td>
+</tr></tbody>
+</table>
+<p class="ltx_p">where <math id="S0.SS0.SSS0.Px5.p3.m1" class="ltx_Math" alttext="\mathbf{x}\in\mathbb{R}^{n},\mathbf{B}:\mathbb{R}^{n}\to\mathbb{R}^{nG},%
+\mathbf{W}^{(1)}\in\mathbb{R}^{(2n+1)\times nG},\mathbf{W}^{(2)}\in\mathbb{R}^%
+{1\times(2n+1)G}" display="inline"><mrow><mrow><mi>𝐱</mi><mo>∈</mo><mrow><msup><mi>ℝ</mi><mi>n</mi></msup><mo>,</mo><mi>𝐁</mi></mrow></mrow><mo>:</mo><mrow><mrow><msup><mi>ℝ</mi><mi>n</mi></msup><mo>→</mo><msup><mi>ℝ</mi><mrow><mi>n</mi><mo>⁢</mo><mi>G</mi></mrow></msup></mrow><mo>,</mo><mrow><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></msup><mo>∈</mo><msup><mi>ℝ</mi><mrow><mrow><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow><mo>×</mo><mi>n</mi></mrow><mo>⁢</mo><mi>G</mi></mrow></msup></mrow><mo>,</mo><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">)</mo></mrow></msup><mo>∈</mo><msup><mi>ℝ</mi><mrow><mrow><mn>1</mn><mo>×</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mn>2</mn><mo>⁢</mo><mi>n</mi></mrow><mo>+</mo><mn>1</mn></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>⁢</mo><mi>G</mi></mrow></msup></mrow></mrow></mrow></mrow></math>.</p>
+</div>
+<div id="S0.SS0.SSS0.Px5.p4" class="ltx_para">
+<p class="ltx_p">Here <math id="S0.SS0.SSS0.Px5.p4.m1" class="ltx_Math" alttext="\mathbf{B}(\mathbf{x})" display="inline"><mrow><mi>𝐁</mi><mo>⁢</mo><mrow><mo stretchy="false">(</mo><mi>𝐱</mi><mo stretchy="false">)</mo></mrow></mrow></math> is unlike other activation functions. Instead of producing a scalar from a scalar, it produces <math id="S0.SS0.SSS0.Px5.p4.m2" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math> different values for each scalar value in the input.</p>
+</div>
+</section>
+<section id="S0.SS0.SSS0.Px6" class="ltx_paragraph">
+<h2 class="ltx_title ltx_title_paragraph">The claim that KANs beat the curse of dimensionality is wrong</h2>
+
+<div id="S0.SS0.SSS0.Px6.p1" class="ltx_para">
+<p class="ltx_p">The authors claim that,</p>
+<blockquote class="ltx_quote">
+<p class="ltx_p">KANs with finite grid size can approximate the function well with a residue rate independent of the dimension, hence beating curse of dimensionality!</p>
+</blockquote>
+</div>
+<div id="S0.SS0.SSS0.Px6.p2" class="ltx_para">
+<p class="ltx_p">This is a huge claim and requires huge evidence. As outlined in the previous section, if all KANs can be written as MLPs then either both MLPs and KANs beat the curse of dimensionality or neither does.</p>
+</div>
+<div id="S0.SS0.SSS0.Px6.p3" class="ltx_para">
+<p class="ltx_p">My first objection is how ”curse of dimensionality” is interpreted. Typically curse of dimensionality in machine learning is measured by the amount of data needed for training a function to a desired error.</p>
+</div>
+<div id="S0.SS0.SSS0.Px6.p4" class="ltx_para">
+<p class="ltx_p">I do not understand the proof of Theorem 2.1, especially the first step.
+It is not clear from what theorem in <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="A practical guide to splines" class="ltx_ref">4</a>]</cite> the first result follows. If page number or chapter is provided that would be great.</p>
+</div>
+<div id="S0.SS0.SSS0.Px6.p5" class="ltx_para">
+<p class="ltx_p">It is also counter intuitive because a singular grid size <math id="S0.SS0.SSS0.Px6.p5.m1" class="ltx_Math" alttext="G" display="inline"><mi>G</mi></math> is assumed for all the <math id="S0.SS0.SSS0.Px6.p5.m2" class="ltx_Math" alttext="n" display="inline"><mi>n</mi></math> input dimensions. What would the bound look like if each dimension of <math id="S0.SS0.SSS0.Px6.p5.m3" class="ltx_Math" alttext="x" display="inline"><mi>x</mi></math> is divided into different grid sizes.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Aziznejad, H. Gupta, J. Campos, and M. Unser</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Deep neural networks with trainable activations and controlled lipschitz constant</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Transactions on Signal Processing</span> <span class="ltx_text ltx_bib_volume">68</span> (<span class="ltx_text ltx_bib_number"></span>), <span class="ltx_text ltx_bib_pages"> pp. 4688–4699</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1109/TSP.2020.3014611" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S0.SS0.SSS0.Px5.p1" title="KANs are MLPs with spline-based activation functions ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_title">KANs are MLPs with spline-based activation functions</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">P. Bohra, J. Campos, H. Gupta, S. Aziznejad, and M. Unser</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Learning activation functions in deep (spline) neural networks</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">IEEE Open Journal of Signal Processing</span> <span class="ltx_text ltx_bib_volume">1</span> (<span class="ltx_text ltx_bib_number"></span>), <span class="ltx_text ltx_bib_pages"> pp. 295–309</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1109/OJSP.2020.3039379" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S0.SS0.SSS0.Px5.p1" title="KANs are MLPs with spline-based activation functions ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_title">KANs are MLPs with spline-based activation functions</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Cybenko</span><span class="ltx_text ltx_bib_year"> (1989)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Approximation by superpositions of a sigmoidal function</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Mathematics of control, signals and systems</span> <span class="ltx_text ltx_bib_volume">2</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 303–314</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S0.I2.i1.p1" title="item 1 ‣ What’s in the name ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_tag">item 1</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. de Boor</span><span class="ltx_text ltx_bib_year"> (2001)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A practical guide to splines</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Applied Mathematical Sciences</span>,  <span class="ltx_text ltx_bib_publisher">Springer New York</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 9780387953663</span>,
+<span class="ltx_text lccn ltx_bib_external">LCCN 20049644</span>,
+<a href="https://books.google.com/books?id=m0QDJvBI_ecC" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S0.SS0.SSS0.Px6.p4" title="The claim that KANs beat the curse of dimensionality is wrong ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_title">The claim that KANs beat the curse of dimensionality is wrong</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">Z. Liu, Y. Wang, S. Vaidya, F. Ruehle, J. Halverson, M. Soljačić, T. Y. Hou, and M. Tegmark</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">KAN: kolmogorov-arnold networks</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">arXiv preprint arXiv:2404.19756</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S0.SS0.SSS0.Px1.p1" title="Why review this? ‣ KAN: Kolmogorov–Arnold Networks: A review" class="ltx_ref"><span class="ltx_text ltx_ref_title">Why review this?</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+<footer class="ltx_page_footer">
+<div class="ltx_page_logo">Generated  on Wed May  8 12:12:58 2024 by <a href="http://dlmf.nist.gov/LaTeXML/">LaTeXML <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==" alt="[LOGO]"></a>
+</div></footer>
+</div>
+</body>
+</html>
