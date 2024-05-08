@@ -3,6 +3,7 @@ layout: post
 title: KAN Kolmogorov-Arnold Networks A review
 date:   2024-05-08
 categories: reviews
+redirect: https://vikasdhiman.info/reviews/KAN_a_review.html
 ---
 On Apr 30, 2024, Komogorov-Arnold Networks paper appears on ArXiV and by May 7th, I have heard about this paper from multiple students, from whom I do not hear about new papers.
 It must be special, I thought.
