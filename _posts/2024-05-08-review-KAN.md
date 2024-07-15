@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: forwarding
 title: KAN Kolmogorov-Arnold Networks A review
 date:   2024-05-08
 categories: reviews
