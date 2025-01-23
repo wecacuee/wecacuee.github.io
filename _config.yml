@@ -15,6 +15,7 @@ header_pages:
   - contact.md
   - publications/mypub.html
   - s/z490.md
+  - ECE275-S25.md 
 
 
 plugins:
