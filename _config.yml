@@ -23,6 +23,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-feed
   - jekyll-remote-theme
+  - jekyll-sitemap
 
 plainwhite:
   name: Vikas Dhiman
