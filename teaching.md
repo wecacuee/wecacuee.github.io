@@ -6,12 +6,15 @@ layout: page
 
 ## Current
 
+- [ECE 490/590 Fall 2025: Neural Networks](/ECE490-F25-Neural-Networks/)
+
+- [ECE 417/598 Fall 2025: Mobile Robots](/ECE417-F25-Mobile-Robots/)
+
+## Past
+
 - [ECE 275 Spring 2025: Sequential Logic Systems](/ECE275-S25-Sequential-Logic)
 
 - [ECE 533: Advanced Robotics](https://docs.google.com/document/d/e/2PACX-1vQW1QMosGNoMuqx0COvS4Bb7dTO0N512w9pr3zF32CL3NLz-G5iYGBGyDIti-Y6PZAjRCSB8ee9DGK3/pub)
-
-
-## Past
 
 - [ECE 417/598 Fall 2024: Mobile Robots](/ECE417-F24-Mobile-Robots/)
 - 
